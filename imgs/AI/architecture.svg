@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="860" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+    </marker>
+    <style>
+      .title{font-size:26px;font-weight:700;fill:#1a1a2e}
+      .sub{font-size:13px;fill:#666}
+      .grp{font-size:15px;font-weight:700}
+      .lbl{font-size:13px;font-weight:700;fill:#fff}
+      .desc{font-size:11px;fill:#eef}
+      .ed{font-size:11px;fill:#555}
+      .small{font-size:11px;fill:#333}
+      .note{font-size:11px;fill:#444}
+    </style>
+  </defs>
+
+  <rect width="1180" height="860" fill="#f6f7fb"/>
+  <text x="40" y="46" class="title">pi monorepo — Architecture</text>
+  <text x="40" y="68" class="sub">npm workspaces: terminal coding agent built on a layered AI/agent/TUI stack</text>
+
+  <!-- ===================== PACKAGES (core) ===================== -->
+  <rect x="40" y="92" width="700" height="430" rx="12" fill="#ffffff" stroke="#d4d8e6"/>
+  <text x="60" y="118" class="grp" fill="#3a3a6a">packages/  (published libraries, lockstep versioned)</text>
+
+  <!-- coding-agent (top app) -->
+  <rect x="70" y="138" width="640" height="92" rx="10" fill="#5b6ee1"/>
+  <text x="86" y="162" class="lbl">coding-agent  ·  the "pi" CLI / TUI app</text>
+  <text x="86" y="182" class="desc">Terminal coding harness. Tools (read/edit/bash...), sessions, slash commands,</text>
+  <text x="86" y="198" class="desc">extensions, skills, prompt templates, themes, RPC mode. Entry binary: pi</text>
+  <text x="86" y="218" class="desc">depends on → ai + agent + tui</text>
+
+  <!-- agent -->
+  <rect x="70" y="250" width="310" height="118" rx="10" fill="#6f86d6"/>
+  <text x="86" y="274" class="lbl">agent  (pi-agent-core)</text>
+  <text x="86" y="294" class="desc">Stateful agent loop: tool execution,</text>
+  <text x="86" y="310" class="desc">event streaming, conversation state.</text>
+  <text x="86" y="330" class="desc">Built on pi-ai.</text>
+  <text x="86" y="352" class="desc">depends on → ai</text>
+
+  <!-- tui -->
+  <rect x="400" y="250" width="310" height="118" rx="10" fill="#48b39b"/>
+  <text x="416" y="274" class="lbl">tui  (pi-tui)</text>
+  <text x="416" y="294" class="desc">Minimal terminal UI framework.</text>
+  <text x="416" y="310" class="desc">Differential rendering, CSI 2026 sync</text>
+  <text x="416" y="326" class="desc">output, components, themes, keybindings.</text>
+  <text x="416" y="352" class="desc">No internal deps (standalone)</text>
+
+  <!-- ai (foundation) -->
+  <rect x="70" y="388" width="640" height="116" rx="10" fill="#8a63d2"/>
+  <text x="86" y="412" class="lbl">ai  (pi-ai)  ·  foundation layer</text>
+  <text x="86" y="432" class="desc">Unified LLM API across providers: OpenAI, Anthropic, Gemini, Bedrock, Mistral.</text>
+  <text x="86" y="448" class="desc">Model discovery, token/cost tracking, streaming, tool-calling, context persistence.</text>
+  <text x="86" y="470" class="desc">models.generated.ts (generated, never hand-edited)</text>
+  <text x="86" y="490" class="desc">no internal deps</text>
+
+  <!-- dependency arrows inside packages -->
+  <line x1="225" y1="230" x2="225" y2="250" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="555" y1="230" x2="555" y2="250" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="225" y1="368" x2="225" y2="388" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="640" y1="368" x2="640" y2="250" stroke="#555" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- ===================== tui zoom ===================== -->
+  <rect x="760" y="92" width="380" height="430" rx="12" fill="#ffffff" stroke="#d4d8e6"/>
+  <text x="780" y="118" class="grp" fill="#2f7d6b">packages/tui — what it does</text>
+  <text x="780" y="142" class="small">Flicker-free interactive CLI rendering engine,</text>
+  <text x="780" y="158" class="small">decoupled from the coding agent so it can be</text>
+  <text x="780" y="174" class="small">reused by any terminal app.</text>
+
+  <text x="780" y="206" class="small" font-weight="700">Core (src/)</text>
+  <text x="780" y="226" class="ed">tui.ts · terminal.ts · editor-component.ts</text>
+  <text x="780" y="242" class="ed">keys.ts · keybindings.ts · autocomplete.ts</text>
+  <text x="780" y="258" class="ed">fuzzy.ts · undo-stack.ts · kill-ring.ts</text>
+  <text x="780" y="274" class="ed">stdin-buffer.ts · terminal-image.ts</text>
+  <text x="780" y="290" class="ed">word-navigation.ts · native-modifiers.ts</text>
+
+  <text x="780" y="322" class="small" font-weight="700">Components (src/components/)</text>
+  <text x="780" y="342" class="ed">Text · TruncatedText · Input · Editor</text>
+  <text x="780" y="358" class="ed">Markdown · Loader · CancellableLoader</text>
+  <text x="780" y="374" class="ed">SelectList · SettingsList · Box · Image · Spacer</text>
+
+  <text x="780" y="406" class="small" font-weight="700">Features</text>
+  <text x="780" y="426" class="ed">· Differential 3-strategy rendering</text>
+  <text x="780" y="442" class="ed">· Synchronized output (CSI 2026, no flicker)</text>
+  <text x="780" y="458" class="ed">· Bracketed paste handling</text>
+  <text x="780" y="474" class="ed">· Inline images (Kitty / iTerm2 protocols)</text>
+  <text x="780" y="490" class="ed">· Theming + configurable keybindings</text>
+
+  <!-- ===================== scripts ===================== -->
+  <rect x="40" y="546" width="1100" height="280" rx="12" fill="#ffffff" stroke="#d4d8e6"/>
+  <text x="60" y="572" class="grp" fill="#7a4a16">scripts/  (repo-level tooling — not shipped to npm)</text>
+  <text x="60" y="592" class="small">Monorepo automation run from the root: release/build, CI quality gates, and usage/cost analytics over session data.</text>
+
+  <!-- group A: build & release -->
+  <rect x="60" y="610" width="345" height="196" rx="10" fill="#fbe9d4" stroke="#e3b07a"/>
+  <text x="76" y="632" class="grp" fill="#9a5a16">Build &amp; Release</text>
+  <text x="76" y="654" class="note">build-binaries.sh — Bun binaries, all platforms</text>
+  <text x="76" y="672" class="note">release.mjs — version bump, tag, push</text>
+  <text x="76" y="690" class="note">local-release.mjs — unpublished local build</text>
+  <text x="76" y="708" class="note">publish.mjs — npm publish helper</text>
+  <text x="76" y="726" class="note">sync-versions.js — lockstep version sync</text>
+  <text x="76" y="744" class="note">generate-coding-agent-shrinkwrap.mjs</text>
+  <text x="76" y="762" class="note">update-source-imports-to-ts.sh</text>
+  <text x="76" y="788" class="ed">→ wired via package.json release:* / version:*</text>
+
+  <!-- group B: checks -->
+  <rect x="417" y="610" width="345" height="196" rx="10" fill="#dff2e6" stroke="#86c79b"/>
+  <text x="433" y="632" class="grp" fill="#2f7d4a">CI / Quality Gates</text>
+  <text x="433" y="654" class="note">check-pinned-deps.mjs — exact dep versions</text>
+  <text x="433" y="672" class="note">check-ts-relative-imports.mjs — import rules</text>
+  <text x="433" y="690" class="note">check-lockfile-commit.mjs — lockfile guard</text>
+  <text x="433" y="708" class="note">check-browser-smoke.mjs +</text>
+  <text x="447" y="724" class="note">browser-smoke-entry.ts — browser build smoke</text>
+  <text x="433" y="742" class="note">generate-coding-agent-shrinkwrap --check</text>
+  <text x="433" y="788" class="ed">→ run by `npm run check` (pre-commit/CI)</text>
+
+  <!-- group C: analytics/profiling -->
+  <rect x="774" y="610" width="346" height="196" rx="10" fill="#e6e9fb" stroke="#9aa3e0"/>
+  <text x="790" y="632" class="grp" fill="#3a3a8a">Analytics &amp; Profiling</text>
+  <text x="790" y="654" class="note">cost.ts · stats.ts — token/cost reports</text>
+  <text x="790" y="672" class="note">tool-stats.ts · read/edit-tool-stats.mjs</text>
+  <text x="790" y="690" class="note">session-context-stats.mjs</text>
+  <text x="790" y="708" class="note">session-transcripts.ts — extract transcripts</text>
+  <text x="790" y="726" class="note">profile-coding-agent-node.mjs (tui/rpc)</text>
+  <text x="790" y="788" class="ed">→ operate on ~/ session logs &amp; perf traces</text>
+
+  <text x="60" y="848" class="sub">Dependency direction: coding-agent → {ai, agent, tui};  agent → ai.  ai &amp; tui are standalone foundations.</text>
+</svg>
